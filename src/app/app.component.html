@@ -1,0 +1,101 @@
+<div class="counter">
+	<div class="form">
+    <div>
+      <svg xmlns="http://www.w3.org/2000/svg" [attr.class]="activebell ? 'bell active' : 'bell'" >
+            <path fill="gray" d="M14.8912285,3.36057461 C14.9674355,1.49221129 16.5685194,0 18.5324757,0 C20.5450486,0 22.1765613,1.56700338 22.1765613,3.5 C22.1765613,3.55027291 22.1754577,3.60029826 22.1732726,3.65005492 C26.4675924,5.03249294 29.8240194,8.49693961 31.0467487,12.8506974 C31.1765685,13.1427691 31.2847107,13.4424665 31.3686763,13.7481464 C31.3686763,13.7481464 31.9509191,14.0595001 32.6903714,21.174592 C33.4298236,28.2896839 35.4436204,30.6656208 35.4436204,30.6656208 C36.9482129,33.6117171 35.4810869,36 32.1658325,36 L3.93337601,36 C0.618511253,36 -0.876188328,33.5979375 0.455902979,30.5593834 C0.455902979,30.5593834 2.1835454,28.1534321 3.23050709,21.1745923 C4.32693018,13.8660525 4.70649524,13.7615043 4.70649524,13.7615043 C4.75251339,13.5998958 4.80504059,13.4398413 4.86372981,13.2815999 C6.06669276,8.37583074 9.9576172,4.52182268 14.8912285,3.36057461 Z"></path>
+      </svg>
+    </div>
+    <h2 class="title">Compte à rebours</h2>
+    
+		<div class="decoration left-decoration">
+			<svg width="61" height="77" viewBox="0 0 61 77" xmlns="http://www.w3.org/2000/svg">
+				<title>signup decoration - left</title>
+				<g fill="#333" fill-rule="evenodd">
+					<rect transform="rotate(-55 34.731 17.932)" x="31.731" y="6.932" width="6" height="22" rx="3"></rect>
+					<rect transform="rotate(-88 22.098 38.547)" x="19.098" y="27.547" width="6" height="22" rx="3"></rect>
+					<rect transform="rotate(-122 34.766 60.068)" x="31.766" y="48.068" width="6" height="24" rx="3"></rect>
+				</g>
+			</svg>
+		</div>
+
+		<input placeholder="heures" class="" type="number"  #hours>
+    <input placeholder="minutes" class="" type="number"  #minutes>
+    <input placeholder="secondes" class="" type="number" #seconds>
+
+    <button type="button" (click)="start(hours.value,minutes.value,seconds.value)" >start</button>
+
+    <div class="decoration right-decoration">
+      <svg width="61" height="77" viewBox="0 0 61 77" xmlns="http://www.w3.org/2000/svg">
+        <title>signup decoration - right</title>
+        <g transform="matrix(-1 0 0 1 47 9)" fill="#333" fill-rule="evenodd">
+          <rect transform="rotate(-55 23.731 8.932)" x="20.731" y="-2.068" width="6" height="22" rx="3"></rect>
+          <rect transform="rotate(-88 11.098 29.547)" x="8.098" y="18.547" width="6" height="22" rx="3"></rect>
+          <rect transform="rotate(-122 23.766 51.068)" x="20.766" y="39.068" width="6" height="24" rx="3"></rect>
+        </g>
+      </svg>
+    </div>
+  </div>
+  <div>
+    <div class="chronometer hour">
+      <div class="rotate r1" [ngStyle]="transformhr1(hour)"  ></div>
+      <div class="rotate r2" [ngStyle]="transformhr2(hour)"  ></div>
+      <div class="rotate r3" [ngStyle]="transformhr3(hour)"  ></div>
+      <div class="rotate r4" [ngStyle]="transformhr4(hour)"  ></div>
+      <div class="time">
+      {{hour}} <span>h</span>
+      </div>
+    </div>
+    <div class="dp">:</div>
+    <div class="chronometer hour">
+      <div class="rotate r1" [ngStyle]="transformr1(minute)"  ></div>
+      <div class="rotate r2" [ngStyle]="transformr2(minute)"  ></div>
+      <div class="rotate r3" [ngStyle]="transformr3(minute)"  ></div>
+      <div class="rotate r4" [ngStyle]="transformr4(minute)"  ></div>      
+      <div class="time">
+      {{minute}} <span>m</span>
+      </div>
+    </div>
+    <div class="dp">:</div>
+    <div class="chronometer hour">
+      <div class="rotate r1" [ngStyle]="transformr1(second)"  ></div>
+      <div class="rotate r2" [ngStyle]="transformr2(second)"  ></div>
+      <div class="rotate r3" [ngStyle]="transformr3(second)"  ></div>
+      <div class="rotate r4" [ngStyle]="transformr4(second)"  ></div>      
+      <div class="time">
+      {{second}} <span>s</span>
+      </div>
+    </div>
+  </div>
+  <div class="form btnend" *ngIf="startstate">
+      <div class="decoration left-decoration">
+        <svg width="61" height="77" viewBox="0 0 61 77" xmlns="http://www.w3.org/2000/svg">
+          <title>signup decoration - left</title>
+          <g fill="#333" fill-rule="evenodd">
+            <rect transform="rotate(-55 34.731 17.932)" x="31.731" y="6.932" width="6" height="22" rx="3"></rect>
+            <rect transform="rotate(-88 22.098 38.547)" x="19.098" y="27.547" width="6" height="22" rx="3"></rect>
+            <rect transform="rotate(-122 34.766 60.068)" x="31.766" y="48.068" width="6" height="24" rx="3"></rect>
+          </g>
+        </svg>
+      </div>
+
+      <button type="button" (click)="pause()" >pause</button>
+      <button type="button" (click)="start(hour,minute,second)" [disabled]="pausestate">resume</button>
+      <button type="button" (click)="stop()" >stop</button>
+
+      <div class="decoration right-decoration">
+        <svg width="61" height="77" viewBox="0 0 61 77" xmlns="http://www.w3.org/2000/svg">
+          <title>signup decoration - right</title>
+          <g transform="matrix(-1 0 0 1 47 9)" fill="#333" fill-rule="evenodd">
+            <rect transform="rotate(-55 23.731 8.932)" x="20.731" y="-2.068" width="6" height="22" rx="3"></rect>
+            <rect transform="rotate(-88 11.098 29.547)" x="8.098" y="18.547" width="6" height="22" rx="3"></rect>
+            <rect transform="rotate(-122 23.766 51.068)" x="20.766" y="39.068" width="6" height="24" rx="3"></rect>
+          </g>
+        </svg>
+      </div>
+  </div>
+</div>
+
+<audio controls id="audioPlayer">
+  <source src="https://www.online-clockalarm.com/sounds/sound3.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
